@@ -166,12 +166,18 @@ The Huitzo team will be online to help you get unstuck.
 
 ## Getting Help
 
+### Quick Help
 1. **[FAQ](faq.md)** -- Check if your question is already answered
 2. **[Troubleshooting](troubleshooting.md)** -- Common issues and fixes
 3. **[SDK Quick Reference](sdk-quick-reference.md)** -- API patterns and examples
 4. **[Discord](https://discord.gg/huitzo)** -- Ask the community
 5. **Office Hours** -- Get live help from the Huitzo team (2-4 PM PT daily)
 6. **GitHub Issues** -- Report bugs or ask technical questions
+
+### Deeper Understanding
+- **[Why Huitzo](concepts/why-huitzo.md)** -- Understanding the infrastructure gap
+- **[Building Methodology](concepts/building-methodology.md)** -- The commands-not-applications paradigm
+- **[From Model to Production](concepts/from-model-to-production.md)** -- What Huitzo handles for you
 
 ---
 

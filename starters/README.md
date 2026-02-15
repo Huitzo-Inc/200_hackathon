@@ -107,7 +107,13 @@ Once you're comfortable with the templates, build your own:
 
 ## Resources
 
+### Quick References
 - [SDK Quick Reference](../docs/sdk-quick-reference.md) -- All APIs at a glance
 - [FAQ](../docs/faq.md) -- Common questions
 - [Troubleshooting](../docs/troubleshooting.md) -- Solutions to common issues
 - [QUICKSTART.md](../QUICKSTART.md) -- Platform overview
+
+### Deeper Understanding
+- [Why Huitzo](../docs/concepts/why-huitzo.md) -- The infrastructure gap and what Huitzo solves
+- [Building Methodology](../docs/concepts/building-methodology.md) -- Commands vs applications paradigm
+- [From Model to Production](../docs/concepts/from-model-to-production.md) -- Infrastructure Huitzo handles for you

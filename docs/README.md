@@ -12,6 +12,16 @@ Welcome to the Huitzo Hackathon documentation. Everything you need to build, tes
 | [What is Huitzo?](what-is-huitzo.md) | Platform concepts and how it works | 5 min |
 | [SDK Quick Reference](sdk-quick-reference.md) | Essential APIs and patterns | 10 min |
 
+## Core Concepts
+
+Deep dive into Huitzo's philosophy and architecture:
+
+| Doc | Description | Time |
+|-----|-------------|------|
+| [Why Huitzo](concepts/why-huitzo.md) | The infrastructure gap between AI models and production | 5 min |
+| [Building Methodology](concepts/building-methodology.md) | Commands, not applications: decomposing problems into focused units | 10 min |
+| [From Model to Production](concepts/from-model-to-production.md) | The complete infrastructure layer Huitzo handles automatically | 15 min |
+
 ## Hackathon Info
 
 | Doc | Description |

@@ -154,7 +154,14 @@ No parsing JSON strings. No hoping the AI returns valid data. No regex extractio
 
 ---
 
-## Next Steps
+## Learn More
+
+### Deep Dive
+- **[Why Huitzo](concepts/why-huitzo.md)** -- The infrastructure gap between AI models and production
+- **[Building Methodology](concepts/building-methodology.md)** -- Commands, not applications: the Huitzo paradigm
+- **[From Model to Production](concepts/from-model-to-production.md)** -- Complete infrastructure layer walkthrough
+
+### Next Steps
 
 - [What is Huitzo?](what-is-huitzo.md) -- Understand the core concepts
 - [Quick Start Guide](../QUICKSTART.md) -- Build your first Intelligence Pack

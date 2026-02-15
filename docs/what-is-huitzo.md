@@ -169,7 +169,17 @@ result = await ctx.llm.complete(prompt="...", schema=LeadScore)
 
 ---
 
-## Next Steps
+## Learn More
+
+### Deep Dive: Core Concepts
+
+For a thorough understanding of Huitzo's architecture and philosophy:
+
+- **[Why Huitzo](concepts/why-huitzo.md)** -- The infrastructure gap between AI models and production systems
+- **[Building Methodology](concepts/building-methodology.md)** -- Commands, not applications: how to decompose problems into Intelligence Packs
+- **[From Model to Production](concepts/from-model-to-production.md)** -- The complete infrastructure layer Huitzo handles automatically
+
+### Next Steps
 
 - [Quick Start Guide](../QUICKSTART.md) -- Install and run your first pack in 5 minutes
 - [SDK Quick Reference](sdk-quick-reference.md) -- All the APIs at a glance

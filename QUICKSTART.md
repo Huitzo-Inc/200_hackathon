@@ -272,6 +272,14 @@ pip install -e .
 - **[Hackathon Guide](docs/hackathon-guide.md)**: Rules and timeline
 - **[Documentation Server](http://localhost:8124)**: Searchable docs (run `./bootws docs`)
 
+### Deeper Understanding
+
+Want to understand Huitzo's philosophy and architecture?
+
+- **[Why Huitzo](docs/concepts/why-huitzo.md)**: The infrastructure gap and what Huitzo solves
+- **[Building Methodology](docs/concepts/building-methodology.md)**: Commands vs applications paradigm
+- **[From Model to Production](docs/concepts/from-model-to-production.md)**: Infrastructure Huitzo handles for you
+
 ---
 
 **Ready to build intelligence? Start with `starters/01-smart-notes` →**

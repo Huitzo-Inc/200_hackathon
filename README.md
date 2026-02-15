@@ -1,4 +1,4 @@
-# Huitzo Hackathon 2026 🚀
+# [Huitzo Hackathon 2026](https://huitzo.com) 🚀
 
 **February 17-24, 2026 | $1,000 in Prizes**
 
@@ -38,10 +38,10 @@ That's it. Huitzo handles the infrastructure, you write the intelligence.
 
 | Prize | Amount | Criteria |
 |-------|--------|----------|
-| **Best Pack** | $400 | Most impressive overall (functionality + creativity + polish) |
+| **Most Impressive** | $250 | (functionality + creativity + polish) |
 | **Most Creative** | $250 | Most innovative use of Huitzo features |
 | **Most Business Friendly** | $250 | Solves a real business problem elegantly |
-| **Worst Bug Found** | $100 | Find the most critical bug in Huitzo |
+| **Worst Bug Found** | $250 | Find the most critical bug in Huitzo |
 
 **Submission Deadline:** February 24, 2026 11:59 PM PT
 
@@ -135,11 +135,19 @@ Ready for production-grade patterns:
 
 ## 📖 Documentation
 
+### Getting Started
 - **[Quick Start Guide](QUICKSTART.md)** - 5-minute intro to Huitzo concepts
 - **[What is Huitzo?](docs/what-is-huitzo.md)** - Deep dive on the platform
-- **[Value Proposition](docs/value-proposition.md)** - Why Huitzo vs alternatives
-- **[Hackathon Guide](docs/hackathon-guide.md)** - Rules, prizes, timeline, office hours
 - **[SDK Quick Reference](docs/sdk-quick-reference.md)** - Essential patterns & APIs
+
+### Core Concepts
+- **[Why Huitzo](docs/concepts/why-huitzo.md)** - The infrastructure gap between AI models and production
+- **[Building Methodology](docs/concepts/building-methodology.md)** - Commands, not applications: the Huitzo approach
+- **[From Model to Production](docs/concepts/from-model-to-production.md)** - Complete infrastructure layer walkthrough
+
+### Hackathon Info
+- **[Hackathon Guide](docs/hackathon-guide.md)** - Rules, prizes, timeline, office hours
+- **[Value Proposition](docs/value-proposition.md)** - Why Huitzo vs alternatives
 - **[FAQ](docs/faq.md)** - Common questions
 - **[Troubleshooting](docs/troubleshooting.md)** - Common issues & solutions
 
@@ -224,11 +232,13 @@ cd starters/01-smart-notes  # Start from any template
 
 ---
 
-## 📜 License
+## 📜 License & Community
 
 MIT License - See [LICENSE](LICENSE) for details.
 
 Hackathon submissions must be original work. See [CONTRIBUTING.md](CONTRIBUTING.md) for full terms.
+
+**Code of Conduct**: All participants must follow our [Code of Conduct](CODE_OF_CONDUCT.md). We're committed to providing a welcoming and inclusive environment for everyone.
 
 ---
 
