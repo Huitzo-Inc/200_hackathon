@@ -1,0 +1,219 @@
+#!/bin/bash
+set -e
+
+HACKATHON_ROOT="$(cd "$(dirname "$0")" && pwd)"
+
+setup() {
+    echo "🚀 Setting up Huitzo Hackathon environment..."
+    echo ""
+
+    # Check Python version
+    if ! command -v python3 &> /dev/null; then
+        echo "❌ Python 3 not found. Please install Python 3.11+ first."
+        exit 1
+    fi
+
+    python_version=$(python3 --version 2>&1 | awk '{print $2}')
+    python_major=$(echo "$python_version" | cut -d. -f1)
+    python_minor=$(echo "$python_version" | cut -d. -f2)
+
+    if [ "$python_major" -lt 3 ] || ([ "$python_major" -eq 3 ] && [ "$python_minor" -lt 11 ]); then
+        echo "❌ Python 3.11+ required. Found: $python_version"
+        echo "   Please upgrade Python: https://www.python.org/downloads/"
+        exit 1
+    fi
+
+    echo "✅ Python $python_version detected"
+    echo ""
+
+    # Install dependencies
+    echo "📦 Installing Huitzo SDK and dependencies..."
+    pip install -q huitzo-sdk your-docs-mcp pytest pyyaml requests || {
+        echo "❌ Installation failed. Check your internet connection and try again."
+        exit 1
+    }
+
+    echo "✅ Dependencies installed"
+    echo ""
+
+    # Setup environment
+    if [ ! -f "$HACKATHON_ROOT/.env" ]; then
+        echo "📝 Creating .env file..."
+        cp "$HACKATHON_ROOT/.env.example" "$HACKATHON_ROOT/.env"
+        echo "✅ .env file created"
+        echo "   ℹ️  Edit .env to add API keys (optional for local development)"
+    else
+        echo "✅ .env file already exists"
+    fi
+
+    echo ""
+
+    # Validate installation
+    echo "🔍 Validating installation..."
+
+    if command -v huitzo &> /dev/null; then
+        huitzo_version=$(huitzo --version 2>&1 || echo "unknown")
+        echo "✅ huitzo-sdk installed: $huitzo_version"
+    else
+        echo "⚠️  huitzo command not found in PATH"
+        echo "   Try: pip install --upgrade huitzo-sdk"
+    fi
+
+    if python3 -c "import your_docs_mcp" 2>/dev/null; then
+        echo "✅ your-docs-mcp installed"
+    else
+        echo "⚠️  your-docs-mcp not found (documentation server won't work)"
+        echo "   Try: pip install your-docs-mcp"
+    fi
+
+    echo ""
+    echo "✅ Setup complete!"
+    echo ""
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo "Next steps:"
+    echo "  1. ./bootws docs              # Start documentation server"
+    echo "  2. cd starters/01-smart-notes # Try your first template"
+    echo "  3. huitzo pack dev            # Start developing!"
+    echo ""
+    echo "Need help? Check docs/faq.md or join Discord:"
+    echo "  https://discord.gg/huitzo"
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo ""
+}
+
+docs() {
+    echo "📚 Starting documentation server..."
+    echo ""
+
+    # Check if your-docs-mcp is installed
+    if ! python3 -c "import your_docs_mcp" 2>/dev/null; then
+        echo "❌ your-docs-mcp not installed"
+        echo "   Run: ./bootws setup"
+        exit 1
+    fi
+
+    # Set environment for MCP server
+    export MCP_DOCS_ENABLE_WEB_SERVER=true
+    export MCP_DOCS_WEB_PORT=8124
+    export DOCS_ROOT="$HACKATHON_ROOT"
+
+    echo "🌐 Documentation server starting..."
+    echo "   Web UI: http://localhost:8124"
+    echo "   MCP: Available for Claude Code, Cursor, Copilot"
+    echo ""
+    echo "   Press Ctrl+C to stop"
+    echo ""
+
+    # Start server
+    cd "$HACKATHON_ROOT"
+    python3 -m your_docs_mcp
+}
+
+check() {
+    echo "🔍 Environment Check"
+    echo ""
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+    # Python
+    if command -v python3 &> /dev/null; then
+        python_version=$(python3 --version 2>&1 | awk '{print $2}')
+        echo "✅ Python: $python_version"
+    else
+        echo "❌ Python: NOT FOUND"
+    fi
+
+    # Huitzo SDK
+    if command -v huitzo &> /dev/null; then
+        huitzo_version=$(huitzo --version 2>&1 || echo "unknown")
+        echo "✅ Huitzo SDK: $huitzo_version"
+    else
+        echo "❌ Huitzo SDK: NOT INSTALLED"
+    fi
+
+    # MCP Server
+    if python3 -c "import your_docs_mcp" 2>/dev/null; then
+        mcp_version=$(pip show your-docs-mcp 2>/dev/null | grep Version | awk '{print $2}')
+        echo "✅ MCP Server: ${mcp_version:-installed}"
+    else
+        echo "❌ MCP Server: NOT INSTALLED"
+    fi
+
+    # Other dependencies
+    if python3 -c "import pytest" 2>/dev/null; then
+        echo "✅ pytest: installed"
+    else
+        echo "⚠️  pytest: not installed"
+    fi
+
+    if python3 -c "import yaml" 2>/dev/null; then
+        echo "✅ pyyaml: installed"
+    else
+        echo "⚠️  pyyaml: not installed"
+    fi
+
+    # Environment file
+    if [ -f "$HACKATHON_ROOT/.env" ]; then
+        echo "✅ .env file: exists"
+    else
+        echo "⚠️  .env file: missing (run ./bootws setup)"
+    fi
+
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo ""
+
+    # Check if setup is needed
+    if ! command -v huitzo &> /dev/null || ! python3 -c "import your_docs_mcp" 2>/dev/null; then
+        echo "⚠️  Setup incomplete. Run: ./bootws setup"
+        echo ""
+    fi
+}
+
+validate() {
+    PACK_DIR="$2"
+
+    if [ -z "$PACK_DIR" ]; then
+        echo "Usage: ./bootws validate <pack-directory>"
+        echo ""
+        echo "Example: ./bootws validate starters/01-smart-notes"
+        exit 1
+    fi
+
+    if [ ! -d "$PACK_DIR" ]; then
+        echo "❌ Directory not found: $PACK_DIR"
+        exit 1
+    fi
+
+    exec "$HACKATHON_ROOT/scripts/validate-pack.sh" "$PACK_DIR"
+}
+
+case "$1" in
+    setup)
+        setup
+        ;;
+    docs)
+        docs
+        ;;
+    check)
+        check
+        ;;
+    validate)
+        validate "$@"
+        ;;
+    *)
+        echo "Huitzo Hackathon 2026 - Environment Bootstrap"
+        echo ""
+        echo "Usage: ./bootws <command>"
+        echo ""
+        echo "Commands:"
+        echo "  setup              Install dependencies and configure environment"
+        echo "  docs               Start documentation server (http://localhost:8124)"
+        echo "  check              Verify installation and environment"
+        echo "  validate <dir>     Validate pack structure"
+        echo ""
+        echo "Quick Start:"
+        echo "  ./bootws setup     # First time setup"
+        echo "  ./bootws docs      # Browse documentation"
+        echo "  ./bootws check     # Verify everything works"
+        echo ""
+        ;;
+esac

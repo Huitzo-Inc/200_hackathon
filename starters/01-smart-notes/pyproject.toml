@@ -1,0 +1,64 @@
+# pyproject.toml - Smart Notes Intelligence Pack
+#
+# Implements:
+#   - docs/sdk/commands.md#packaging
+
+[project]
+name = "smart-notes"
+version = "1.0.0"
+description = "Beginner Intelligence Pack: personal notes with CRUD storage"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.11"
+authors = [
+    { name = "Huitzo Hackathon", email = "hackathon@huitzo.com" }
+]
+keywords = ["huitzo", "intelligence-pack", "notes", "storage", "beginner"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+]
+
+dependencies = [
+    "pydantic>=2.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+    "ruff>=0.1.0",
+]
+
+[project.entry-points."huitzo.commands"]
+"@huitzo/notes/save-note" = "smart_notes.commands:save_note"
+"@huitzo/notes/get-note" = "smart_notes.commands:get_note"
+"@huitzo/notes/list-notes" = "smart_notes.commands:list_notes"
+"@huitzo/notes/delete-note" = "smart_notes.commands:delete_note"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/smart_notes"]
+
+[tool.huitzo]
+namespace = "notes"
+version = "1.0.0"
+description = "Personal notes with CRUD storage"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP"]

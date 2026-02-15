@@ -1,0 +1,74 @@
+# huitzo.yaml - DevOps Monitor Intelligence Pack
+#
+# Implements:
+#   - docs/packs/manifest.md
+
+pack:
+  name: "devops-monitor"
+  namespace: "monitor"
+  version: "1.0.0"
+  description: "Intelligent health monitoring with AI diagnostics and multi-channel alerts"
+  visibility: "public"
+  author: "Huitzo Hackathon"
+  license: "MIT"
+  min_sdk_version: "2.0.0"
+
+commands:
+  - name: "health-check"
+    description: "Check multiple HTTP endpoints and record their status"
+    permissions:
+      - "http:get"
+      - "storage:write"
+    timeout: 60
+
+  - name: "diagnose"
+    description: "AI-analyze recent failures for a service to find root cause patterns"
+    permissions:
+      - "storage:read"
+      - "llm:complete"
+    timeout: 60
+    queue: "medium"
+
+  - name: "alert"
+    description: "Send multi-channel notifications (email + Telegram) for service issues"
+    permissions:
+      - "storage:read"
+      - "email:send"
+      - "telegram:send"
+    timeout: 30
+
+  - name: "status-report"
+    description: "Generate a daily uptime summary with AI-generated insights"
+    permissions:
+      - "storage:read"
+      - "llm:complete"
+    timeout: 60
+    queue: "medium"
+
+services:
+  storage:
+    required: true
+    scope: "user"
+  http:
+    required: true
+  llm:
+    required: true
+    models:
+      - "gpt-4o-mini"
+    default_model: "gpt-4o-mini"
+  email:
+    required: false
+  telegram:
+    required: false
+
+metadata:
+  homepage: "https://github.com/Huitzo-Inc/hackathon-2026"
+  keywords:
+    - "starter"
+    - "advanced"
+    - "devops"
+    - "monitoring"
+    - "health-check"
+    - "alerting"
+    - "ai"
+  category: "devops"

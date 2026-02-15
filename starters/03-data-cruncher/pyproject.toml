@@ -1,0 +1,63 @@
+# pyproject.toml - Data Cruncher Intelligence Pack
+#
+# Implements:
+#   - docs/sdk/commands.md#packaging
+
+[project]
+name = "data-cruncher"
+version = "1.0.0"
+description = "Intermediate Intelligence Pack: CSV analysis with AI insights and report export"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.11"
+authors = [
+    { name = "Huitzo Hackathon", email = "hackathon@huitzo.com" }
+]
+keywords = ["huitzo", "intelligence-pack", "data", "csv", "analysis", "ai"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+]
+
+dependencies = [
+    "pydantic>=2.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+    "ruff>=0.1.0",
+]
+
+[project.entry-points."huitzo.commands"]
+"@huitzo/data/analyze-file" = "data_cruncher.commands:analyze_file"
+"@huitzo/data/ai-insights" = "data_cruncher.commands:ai_insights"
+"@huitzo/data/export-report" = "data_cruncher.commands:export_report"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/data_cruncher"]
+
+[tool.huitzo]
+namespace = "data"
+version = "1.0.0"
+description = "CSV analysis with AI insights and report export"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP"]

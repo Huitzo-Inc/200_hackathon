@@ -1,0 +1,67 @@
+# pyproject.toml - Lead Engine Starter Template
+#
+# Implements:
+#   - docs/sdk/commands.md#entry-points
+
+[project]
+name = "lead-engine"
+version = "1.0.0"
+description = "AI-powered lead scoring and outreach engine - Huitzo starter template"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.11"
+authors = [
+    { name = "Huitzo Inc.", email = "dev@huitzo.com" }
+]
+keywords = ["huitzo", "intelligence-pack", "leads", "sales", "ai", "email"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+]
+
+dependencies = [
+    "huitzo-sdk>=2.0.0",
+    "pydantic>=2.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+    "ruff>=0.1.0",
+]
+
+[project.entry-points."huitzo.commands"]
+"@huitzo/leads/add-lead" = "lead_engine.commands:add_lead"
+"@huitzo/leads/score-lead" = "lead_engine.commands:score_lead"
+"@huitzo/leads/send-outreach" = "lead_engine.commands:send_outreach"
+"@huitzo/leads/pipeline-report" = "lead_engine.commands:pipeline_report"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/lead_engine"]
+
+[tool.huitzo]
+namespace = "leads"
+version = "1.0.0"
+description = "AI-powered lead scoring and outreach engine"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP"]

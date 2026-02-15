@@ -1,0 +1,85 @@
+# huitzo.yaml - Lead Engine Pack Manifest
+#
+# Implements:
+#   - docs/packs/manifest.md
+
+pack:
+  name: "lead-engine"
+  namespace: "leads"
+  version: "1.0.0"
+  description: "AI-powered lead scoring and outreach engine"
+  visibility: "public"
+  author: "Huitzo Hackathon"
+  license: "MIT"
+  min_sdk_version: "2.0.0"
+
+commands:
+  - name: "add-lead"
+    description: "Add a new lead with company and contact information"
+    permissions:
+      - "storage:write"
+      - "http:request"
+    timeout: 30
+
+  - name: "score-lead"
+    description: "AI-score a lead 0-100 with tier classification (hot/warm/cold)"
+    permissions:
+      - "storage:read"
+      - "storage:write"
+      - "llm:complete"
+    timeout: 60
+
+  - name: "send-outreach"
+    description: "Send personalized outreach email using templates and AI"
+    permissions:
+      - "storage:read"
+      - "storage:write"
+      - "llm:complete"
+      - "email:send"
+    timeout: 30
+
+  - name: "pipeline-report"
+    description: "Generate daily pipeline report with AI-powered insights"
+    permissions:
+      - "storage:read"
+      - "llm:complete"
+    timeout: 60
+
+data_types:
+  - name: "lead"
+    description: "Lead records with scoring and outreach status"
+    ttl_days: 365
+    scope: "user"
+
+services:
+  llm:
+    required: true
+    models:
+      - "gpt-4o-mini"
+    default_model: "gpt-4o-mini"
+
+  email:
+    required: true
+    description: "Used for sending outreach emails to leads"
+
+  http:
+    required: false
+    description: "Optional - used for company enrichment"
+    allowed_domains:
+      - "api.enrichment.example.com"
+    timeout: 10
+
+  storage:
+    required: true
+    description: "Stores lead records with metadata for querying"
+
+metadata:
+  homepage: "https://github.com/Huitzo-Inc/hackathon-2026"
+  keywords:
+    - "leads"
+    - "sales"
+    - "ai"
+    - "email"
+    - "crm"
+    - "outreach"
+  category: "business"

@@ -1,0 +1,54 @@
+# huitzo.yaml - Smart Notes Intelligence Pack
+#
+# Implements:
+#   - docs/packs/manifest.md
+
+pack:
+  name: "smart-notes"
+  namespace: "notes"
+  version: "1.0.0"
+  description: "Personal notes with CRUD storage - beginner starter template"
+  visibility: "public"
+  author: "Huitzo Hackathon"
+  license: "MIT"
+  min_sdk_version: "2.0.0"
+
+commands:
+  - name: "save-note"
+    description: "Save or update a note by title"
+    permissions:
+      - "storage:write"
+    timeout: 30
+
+  - name: "get-note"
+    description: "Retrieve a note by title"
+    permissions:
+      - "storage:read"
+    timeout: 15
+
+  - name: "list-notes"
+    description: "List all saved notes with optional limit"
+    permissions:
+      - "storage:read"
+    timeout: 15
+
+  - name: "delete-note"
+    description: "Delete a note by title"
+    permissions:
+      - "storage:delete"
+    timeout: 15
+
+services:
+  storage:
+    required: true
+    scope: "user"
+
+metadata:
+  homepage: "https://github.com/Huitzo-Inc/hackathon-2026"
+  keywords:
+    - "starter"
+    - "beginner"
+    - "notes"
+    - "storage"
+    - "crud"
+  category: "productivity"

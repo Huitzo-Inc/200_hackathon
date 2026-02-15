@@ -1,0 +1,55 @@
+# huitzo.yaml - AI Content Toolkit Intelligence Pack
+#
+# Implements:
+#   - docs/packs/manifest.md
+
+pack:
+  name: "ai-content-toolkit"
+  namespace: "content"
+  version: "1.0.0"
+  description: "AI-powered text summarization, entity extraction, and rewriting"
+  visibility: "public"
+  author: "Huitzo Hackathon"
+  license: "MIT"
+  min_sdk_version: "2.0.0"
+
+commands:
+  - name: "summarize"
+    description: "Summarize text with bullet points and sentiment analysis"
+    permissions:
+      - "llm:complete"
+    timeout: 60
+    queue: "medium"
+
+  - name: "extract-entities"
+    description: "Extract people, companies, dates, and locations from text"
+    permissions:
+      - "llm:complete"
+    timeout: 60
+    queue: "medium"
+
+  - name: "rewrite"
+    description: "Rewrite text in a different tone (formal, casual, technical)"
+    permissions:
+      - "llm:complete"
+    timeout: 60
+    queue: "medium"
+
+services:
+  llm:
+    required: true
+    models:
+      - "gpt-4o-mini"
+    default_model: "gpt-4o-mini"
+
+metadata:
+  homepage: "https://github.com/Huitzo-Inc/hackathon-2026"
+  keywords:
+    - "starter"
+    - "beginner-plus"
+    - "llm"
+    - "summarize"
+    - "entities"
+    - "rewrite"
+    - "ai"
+  category: "ai"

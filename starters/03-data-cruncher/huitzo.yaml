@@ -1,0 +1,67 @@
+# huitzo.yaml - Data Cruncher Intelligence Pack
+#
+# Implements:
+#   - docs/packs/manifest.md
+
+pack:
+  name: "data-cruncher"
+  namespace: "data"
+  version: "1.0.0"
+  description: "CSV analysis with AI insights and report export"
+  visibility: "public"
+  author: "Huitzo Hackathon"
+  license: "MIT"
+  min_sdk_version: "2.0.0"
+
+commands:
+  - name: "analyze-file"
+    description: "Read a CSV file, compute column statistics, and store results"
+    permissions:
+      - "files:read"
+      - "storage:write"
+    timeout: 60
+    queue: "medium"
+
+  - name: "ai-insights"
+    description: "Generate AI-powered insights from stored analysis results"
+    permissions:
+      - "storage:read"
+      - "llm:complete"
+    timeout: 60
+    queue: "medium"
+
+  - name: "export-report"
+    description: "Export analysis results to a downloadable CSV report"
+    permissions:
+      - "storage:read"
+      - "files:write"
+    timeout: 60
+    queue: "medium"
+
+services:
+  storage:
+    required: true
+    scope: "user"
+
+  llm:
+    required: true
+    models:
+      - "gpt-4o-mini"
+    default_model: "gpt-4o-mini"
+
+  files:
+    required: true
+    allowed_types:
+      - "csv"
+      - "xlsx"
+
+metadata:
+  homepage: "https://github.com/Huitzo-Inc/hackathon-2026"
+  keywords:
+    - "starter"
+    - "intermediate"
+    - "data"
+    - "csv"
+    - "analysis"
+    - "ai"
+  category: "data"

@@ -1,0 +1,50 @@
+sources:
+  # Hackathon documentation (PUBLIC SAFE ONLY)
+  - path: ./docs
+    category: hackathon
+    label: Huitzo Hackathon Documentation
+    recursive: true
+    # This directory contains ONLY public-safe documentation:
+    # - Quickstart guides
+    # - SDK quick reference (consolidated)
+    # - Hackathon-specific guides (rules, prizes, FAQ)
+    # NO internal/confidential documentation
+
+  - path: ./starters
+    category: examples
+    label: Starter Templates
+    recursive: true
+    # Include README.md and tutorial.md from each template
+    patterns:
+      - "**/*.md"
+
+cache:
+  ttl: 1800  # 30 minutes (faster iteration during hackathon)
+  max_memory_mb: 100  # Smaller since we're only serving hackathon docs
+
+security:
+  allow_hidden_files: false
+  audit_logging: false  # Keep it simple for hackathon
+  # IMPORTANT: Only serve ./docs and ./starters directories
+
+web:
+  enabled: true
+  host: "127.0.0.1"
+  port: 8124
+  cors_enabled: false  # Local only
+  title: "Huitzo Hackathon 2026 Documentation"
+
+search:
+  max_results: 30
+  excerpt_length: 250
+  highlight_enabled: true
+  case_sensitive: false
+
+metadata:
+  default_author: "Huitzo Inc"
+  project_name: "Huitzo Hackathon 2026"
+  version: "1.0"
+  description: "Build Intelligence, Not Automation"
+
+# SECURITY NOTE: This MCP server serves ONLY public hackathon documentation.
+# Do NOT add paths to main Huitzo repo or internal documentation.
